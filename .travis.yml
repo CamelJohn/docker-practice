@@ -8,4 +8,16 @@ before_install:
 
 script:
   - docker run -e CI=true cameljohn/docker-practice npm run test
-  
+
+deploy:
+  provider: elastikbeanstalk
+  region: "eu-central-1"
+  app: "docker-practice"
+  env: "DockerParctice-env"
+  bucket_name: "elasticbeanstalk-eu-central-1-231122081767"
+  bucket_path: "docker-practice"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
